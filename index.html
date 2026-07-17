@@ -4,126 +4,247 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onyx - Privacy Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #4f378a;
+            --primary-light: #6750a4;
+            --primary-bg: #f5f2fd;
+            --text-main: #1d1b20;
+            --text-muted: #49454f;
+            --bg-page: #f8f6fc;
+            --card-bg: #ffffff;
+            --divider: #cac4d0;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
             line-height: 1.6;
-            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #f9f9fb;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(79, 55, 138, 0.06);
+            overflow: hidden;
+            border: 1px solid rgba(79, 55, 138, 0.08);
         }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #311B92 100%);
+            padding: 50px 30px;
+            color: white;
         }
+
+        .logo-container {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 18px;
+        }
+
         h1 {
-            color: #311B92;
-            font-size: 2.2rem;
-            margin-bottom: 5px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.4rem;
+            margin: 0 0 10px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
+
         .subtitle {
-            color: #666;
             font-size: 1rem;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
+            opacity: 0.85;
+            font-weight: 500;
         }
+
+        .content {
+            padding: 40px;
+        }
+
         h2 {
-            color: #4F378A;
-            font-size: 1.4rem;
-            margin-top: 30px;
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 35px;
             margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
         }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background-color: var(--primary-light);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
         p, li {
-            font-size: 1.05rem;
-            color: #444;
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
         }
+
         ul {
             padding-left: 20px;
         }
+
         li {
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
+
         .highlight-box {
-            background-color: #f0ecf9;
-            border-left: 4px solid #4F378A;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 8px 8px 0;
+            background-color: var(--primary-bg);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
         }
+
+        .highlight-box h3 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
         .highlight-box p {
             margin: 0;
+            font-size: 0.95rem;
+            color: var(--primary-light);
             font-weight: 500;
-            color: #311B92;
         }
+
         .footer {
-            margin-top: 40px;
+            background-color: #faf9fc;
+            padding: 30px;
             text-align: center;
             font-size: 0.9rem;
-            color: #888;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+            color: #79747e;
+            border-top: 1px solid rgba(79, 55, 138, 0.08);
         }
+
         a {
-            color: #4F378A;
+            color: var(--primary-light);
             text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .email-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .email-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
             font-weight: 500;
         }
-        a:hover {
-            text-decoration: underline;
+
+        .email-icon {
+            margin-right: 8px;
+            color: var(--primary-light);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Onyx Privacy Policy</h1>
-        <div class="subtitle">Effective Date: July 17, 2026</div>
-
-        <p>Welcome to <strong>Onyx</strong> ("we," "our," or "us"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application Onyx (the "App").</p>
-
-        <h2>1. Information We Collect</h2>
-        <p>To provide you with our expense tracking features, we collect the following types of information:</p>
-        <ul>
-            <li><strong>Account Information:</strong> When you sign up via email/password or use Google/Facebook Social Login, we collect your name, email address, profile picture (if applicable), and user ID.</li>
-            <li><strong>Financial Data:</strong> This includes expenses, transaction details, and wallets you manually log or sync inside the App.</li>
-        </ul>
-
-        <div class="highlight-box">
-            <p><strong>SMS Permission & Data Usage:</strong> Onyx includes an optional feature to automatically sync your financial transactions by reading incoming SMS messages. We ONLY scan transactional SMS messages (such as debit/credit alerts from your bank) locally on your device to extract transaction details (amount, vendor, timestamp). We do NOT read your personal conversations, and we do NOT upload your raw SMS text to any third-party servers.</p>
+        <div class="header">
+            <div class="logo-container">
+                <img class="logo-img" src="logo.png" alt="Onyx Logo">
+            </div>
+            <h1>Onyx Privacy Policy</h1>
+            <div class="subtitle">Effective Date: July 17, 2026</div>
         </div>
 
-        <h2>2. How We Use Your Information</h2>
-        <p>We use the collected information for the following purposes:</p>
-        <ul>
-            <li>To set up and manage your secure user account.</li>
-            <li>To track, categorize, and present your expenses and income data.</li>
-            <li>To automatically extract transaction information from bank SMS alerts (if SMS Sync is enabled by you).</li>
-            <li>To secure your data using our Supabase backend infrastructure.</li>
-        </ul>
+        <div class="content">
+            <p>Welcome to <strong>Onyx</strong> ("we," "our," or "us"). We are committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our mobile application, Onyx (the "App").</p>
 
-        <h2>3. Data Storage & Security</h2>
-        <p>All data processed by Onyx is secured and stored using <strong>Supabase</strong>, our cloud database provider. We utilize industry-standard encryption protocols to protect your personal and financial information. We do not sell, rent, or trade your personal data with third parties.</p>
+            <h2>1. Information We Collect</h2>
+            <p>To provide you with our expense tracking and financial analysis features, we collect the following types of information:</p>
+            <ul>
+                <li><strong>Account Information:</strong> When you register via email or use Google/Facebook Social Logins, we collect your name, email address, profile picture (if provided), and unique user identifier.</li>
+                <li><strong>Financial Records:</strong> Transaction details, logs, expense amounts, categories, dates, and connected wallet names.</li>
+            </ul>
 
-        <h2>4. Third-Party Integrations</h2>
-        <p>Our App integrates with the following third-party services for authentication:</p>
-        <ul>
-            <li><strong>Google Sign-In:</strong> Subject to <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
-            <li><strong>Facebook Login (Meta):</strong> Subject to <a href="https://www.facebook.com/policy.php" target="_blank">Meta's Data Policy</a>.</li>
-        </ul>
+            <div class="highlight-box">
+                <h3>SMS Scanning & Data Usage</h3>
+                <p>Onyx includes an optional feature that scans transactional SMS alerts (such as debit/credit alerts from bank accounts) locally on your device to parse transaction values and auto-detect your expenses. We do NOT read your personal messages, and your raw SMS texts are NEVER sent to our servers. Only the parsed transaction details (amount, category, and date) are stored securely in your private cloud account.</p>
+            </div>
 
-        <h2>5. Your Data Rights & Account Deletion</h2>
-        <p>You have the right to access, update, or delete your personal data at any time. If you wish to delete your Onyx account and permanently remove all your data from our database, you can do so directly in the App settings, or by visiting our <a href="data-deletion.html">User Data Deletion Instructions page</a>.</p>
+            <h2>2. Artificial Intelligence (AI) Features</h2>
+            <p>Onyx incorporates advanced Artificial Intelligence features to analyze your spending history and provide customized budgeting advice, expense forecasts, and personalized financial feedback.</p>
+            <ul>
+                <li><strong>Data Processing for AI:</strong> Our AI algorithms process your logged transactional data (amounts, categories, and timestamps) to generate insights.</li>
+                <li><strong>Privacy Safeguards:</strong> Your personal data is never shared with third parties to train public AI models. All insights are generated dynamically and securely within our encrypted database environment.</li>
+            </ul>
 
-        <h2>6. Changes to This Policy</h2>
-        <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the effective date.</p>
+            <h2>3. How We Use Your Information</h2>
+            <p>The information we collect is utilized to:</p>
+            <ul>
+                <li>Create and secure your user profile.</li>
+                <li>Track and organize your personal cash flow, budgets, and wallets.</li>
+                <li>Analyze spending behaviors to generate automated AI feedback and suggestions.</li>
+                <li>Sync your data across devices securely via our Supabase database.</li>
+            </ul>
 
-        <h2>7. Contact Us</h2>
-        <p>If you have any questions or concerns about this Privacy Policy, please contact us at:</p>
-        <p>Email: <a href="mailto:hamim.leon@gmail.com">hamim.leon@gmail.com</a></p>
+            <h2>4. Third-Party Integrations</h2>
+            <p>Onyx connects to standard social authentication providers:</p>
+            <ul>
+                <li><strong>Google Sign-In:</strong> Covered by <a href="https://policies.google.com/privacy" target="_blank">Google's Privacy Policy</a>.</li>
+                <li><strong>Facebook Login (Meta):</strong> Covered by <a href="https://www.facebook.com/policy.php" target="_blank">Meta's Data Policy</a>.</li>
+            </ul>
+
+            <h2>5. Your Data Rights & Deletion</h2>
+            <p>You have full ownership of your data. You can edit or purge your financial data inside the App, or request a complete account and data removal at any time. For steps on how to do this, please view our <a href="data-deletion.html">User Data Deletion Instructions</a>.</p>
+
+            <h2>6. Contact Us</h2>
+            <p>For any questions or request regarding this privacy policy or your data rights, please contact us at:</p>
+            <ul class="email-list">
+                <li><span class="email-icon">&#9993;</span> <a href="mailto:hamim.leon@gmail.com">hamim.leon@gmail.com</a></li>
+                <li><span class="email-icon">&#9993;</span> <a href="mailto:hamim15-5264@diu.edu.bd">hamim15-5264@diu.edu.bd</a></li>
+            </ul>
+        </div>
 
         <div class="footer">
             &copy; 2026 Onyx App. All rights reserved.

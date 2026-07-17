@@ -4,121 +4,245 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onyx - User Data Deletion Instructions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #4f378a;
+            --primary-light: #6750a4;
+            --primary-bg: #f5f2fd;
+            --text-main: #1d1b20;
+            --text-muted: #49454f;
+            --bg-page: #f8f6fc;
+            --card-bg: #ffffff;
+            --divider: #cac4d0;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
             line-height: 1.6;
-            color: #333;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 40px 20px;
-            background-color: #f9f9fb;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(79, 55, 138, 0.06);
+            overflow: hidden;
+            border: 1px solid rgba(79, 55, 138, 0.08);
         }
-        .container {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-        }
-        h1 {
-            color: #311B92;
-            font-size: 2.2rem;
-            margin-bottom: 5px;
-        }
-        .subtitle {
-            color: #666;
-            font-size: 1rem;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #eee;
-            padding-bottom: 15px;
-        }
-        h2 {
-            color: #4F378A;
-            font-size: 1.4rem;
-            margin-top: 30px;
-            margin-bottom: 15px;
-        }
-        p, li {
-            font-size: 1.05rem;
-            color: #444;
-        }
-        ul {
-            padding-left: 20px;
-        }
-        li {
-            margin-bottom: 8px;
-        }
-        .highlight-box {
-            background-color: #f5f2fd;
-            border-left: 4px solid #311B92;
-            padding: 20px;
-            margin: 25px 0;
-            border-radius: 0 8px 8px 0;
-        }
-        .highlight-box h3 {
-            margin-top: 0;
-            color: #311B92;
-        }
-        .footer {
-            margin-top: 40px;
+
+        .header {
             text-align: center;
-            font-size: 0.9rem;
-            color: #888;
-            border-top: 1px solid #eee;
-            padding-top: 20px;
+            background: linear-gradient(135deg, var(--primary) 0%, #311B92 100%);
+            padding: 50px 30px;
+            color: white;
         }
-        a {
-            color: #4F378A;
-            text-decoration: none;
+
+        .logo-container {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 18px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.4rem;
+            margin: 0 0 10px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
             font-weight: 500;
         }
+
+        .content {
+            padding: 40px;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background-color: var(--primary-light);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        p, li {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background-color: var(--primary-bg);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .highlight-box h3 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--primary-light);
+            font-weight: 500;
+        }
+
+        .footer {
+            background-color: #faf9fc;
+            padding: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #79747e;
+            border-top: 1px solid rgba(79, 55, 138, 0.08);
+        }
+
+        a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
         a:hover {
+            color: var(--primary);
             text-decoration: underline;
+        }
+
+        .email-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .email-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .email-icon {
+            margin-right: 8px;
+            color: var(--primary-light);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Onyx - Data Deletion Instructions</h1>
-        <div class="subtitle">Last Updated: July 17, 2026</div>
-
-        <p>At Onyx, we value your privacy and control over your personal data. According to Meta (Facebook) and Google Play Platform rules, you have the right to request the deletion of your account and any associated data synced from third-party social integrations (like Facebook Login).</p>
-
-        <p>Here are the step-by-step instructions on how to request the deletion of your user data:</p>
-
-        <div class="highlight-box">
-            <h3>Method 1: In-App Account Deletion (Recommended)</h3>
-            <p>You can instantly delete all your data directly inside the App:</p>
-            <ol>
-                <li>Open the <strong>Onyx</strong> app.</li>
-                <li>Go to the <strong>Profile</strong> tab (person icon in the bottom menu).</li>
-                <li>Select <strong>Login and security</strong> (or <strong>Data and privacy</strong>).</li>
-                <li>Tap <strong>Delete Account</strong> and confirm.</li>
-            </ol>
-            <p><em>*Note: This will instantly and permanently delete your profile, transaction logs, and wallet configurations from our database.</em></p>
+        <div class="header">
+            <div class="logo-container">
+                <img class="logo-img" src="logo.png" alt="Onyx Logo">
+            </div>
+            <h1>Onyx Data Deletion</h1>
+            <div class="subtitle">Last Updated: July 17, 2026</div>
         </div>
 
-        <div class="highlight-box">
-            <h3>Method 2: Email Data Deletion Request</h3>
-            <p>If you cannot access the App or wish to request deletion manually, you can email us:</p>
-            <ol>
-                <li>Send an email to: <a href="mailto:hamim.leon@gmail.com">hamim.leon@gmail.com</a></li>
-                <li>Subject line: <strong>Onyx Data Deletion Request</strong></li>
-                <li>In the email body, provide your registered email address or your Facebook User ID associated with the App.</li>
-            </ol>
-            <p>Upon receiving your email, we will permanently purge all your profile information, social tokens, transactional logs, and sync configurations from our servers within <strong>48 hours</strong>. You will receive a confirmation email once the process is complete.</p>
+        <div class="content">
+            <p>At Onyx, we value your privacy and control over your personal data. According to Meta (Facebook) and Google Play Platform rules, you have the right to request the deletion of your account and any associated data synced from third-party social integrations (like Facebook Login).</p>
+
+            <p>Here are the step-by-step instructions on how to request the deletion of your user data:</p>
+
+            <div class="highlight-box">
+                <h3>Method 1: In-App Account Deletion (Recommended)</h3>
+                <p>You can instantly delete all your data directly inside the App:</p>
+                <ol>
+                    <li>Open the <strong>Onyx</strong> app.</li>
+                    <li>Go to the <strong>Profile</strong> tab (person icon in the bottom menu).</li>
+                    <li>Select <strong>Login and security</strong> (or <strong>Data and privacy</strong>).</li>
+                    <li>Tap <strong>Delete Account</strong> and confirm.</li>
+                </ol>
+                <p><em>*Note: This will instantly and permanently delete your profile, transaction logs, and wallet configurations from our database.</em></p>
+            </div>
+
+            <div class="highlight-box">
+                <h3>Method 2: Email Data Deletion Request</h3>
+                <p>If you cannot access the App or wish to request deletion manually, you can email us:</p>
+                <ol>
+                    <li>Send an email to our support team (addresses below).</li>
+                    <li>Subject line: <strong>Onyx Data Deletion Request</strong></li>
+                    <li>In the email body, provide your registered email address or your Facebook User ID associated with the App.</li>
+                </ol>
+                <p>Upon receiving your email, we will permanently purge all your profile information, social tokens, transactional logs, and sync configurations from our servers within <strong>48 hours</strong>. You will receive a confirmation email once the process is complete.</p>
+            </div>
+
+            <h2>What Data is Deleted?</h2>
+            <p>When you delete your account, the following information is permanently destroyed from our Supabase database:</p>
+            <ul>
+                <li>Your user account profile (Name, email address, avatar photo).</li>
+                <li>All logged income, expenses, and budget plans.</li>
+                <li>All connected wallet information.</li>
+                <li>Saved security questions and answer hashes.</li>
+            </ul>
+
+            <p>Go back to the <a href="index.html">Onyx Privacy Policy</a>.</p>
+
+            <h2>Contact Support</h2>
+            <p>If you have any questions or require manual data deletion support, please contact us at:</p>
+            <ul class="email-list">
+                <li><span class="email-icon">&#9993;</span> <a href="mailto:hamim.leon@gmail.com">hamim.leon@gmail.com</a></li>
+                <li><span class="email-icon">&#9993;</span> <a href="mailto:hamim15-5264@diu.edu.bd">hamim15-5264@diu.edu.bd</a></li>
+            </ul>
         </div>
-
-        <h2>What Data is Deleted?</h2>
-        <p>When you delete your account, the following information is permanently destroyed from our Supabase database:</p>
-        <ul>
-            <li>Your user account profile (Name, email address, avatar photo).</li>
-            <li>All logged income, expenses, and budget plans.</li>
-            <li>All connected wallet information.</li>
-            <li>Saved security questions and answer hashes.</li>
-        </ul>
-
-        <p>Go back to the <a href="index.html">Onyx Privacy Policy</a>.</p>
 
         <div class="footer">
             &copy; 2026 Onyx App. All rights reserved.
