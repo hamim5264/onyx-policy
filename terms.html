@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Onyx - Terms of Service</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f378a;
+            --primary-light: #6750a4;
+            --primary-bg: #f5f2fd;
+            --text-main: #1d1b20;
+            --text-muted: #49454f;
+            --bg-page: #f8f6fc;
+            --card-bg: #ffffff;
+            --divider: #cac4d0;
+            --radius-lg: 24px;
+            --radius-md: 16px;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-page);
+            color: var(--text-main);
+            line-height: 1.6;
+            margin: 0;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: var(--card-bg);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 10px 30px rgba(79, 55, 138, 0.06);
+            overflow: hidden;
+            border: 1px solid rgba(79, 55, 138, 0.08);
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, #311B92 100%);
+            padding: 50px 30px;
+            color: white;
+        }
+
+        .logo-container {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .logo-img {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: 18px;
+        }
+
+        h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.4rem;
+            margin: 0 0 10px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            opacity: 0.85;
+            font-weight: 500;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        h2 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-top: 35px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+
+        h2::before {
+            content: "";
+            display: inline-block;
+            width: 4px;
+            height: 20px;
+            background-color: var(--primary-light);
+            margin-right: 10px;
+            border-radius: 2px;
+        }
+
+        p, li {
+            font-size: 1rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .highlight-box {
+            background-color: var(--primary-bg);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+        }
+
+        .highlight-box h3 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--primary-light);
+            font-weight: 500;
+        }
+
+        .footer {
+            background-color: #faf9fc;
+            padding: 30px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #79747e;
+            border-top: 1px solid rgba(79, 55, 138, 0.08);
+        }
+
+        a {
+            color: var(--primary-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .email-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .email-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .email-icon {
+            margin-right: 8px;
+            color: var(--primary-light);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img class="logo-img" src="logo.png" alt="Onyx Logo">
+            </div>
+            <h1>Onyx Terms of Service</h1>
+            <div class="subtitle">Effective Date: July 17, 2026</div>
+        </div>
+
+        <div class="content">
+            <p>Welcome to <strong>Onyx</strong>. By downloading, installing, or accessing our mobile application (the "App"), you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, do not use the App.</p>
+
+            <h2>1. Use of the App</h2>
+            <p>Onyx is a personal financial management tool designed to help you track expenses, manage budgets, and analyze spending. You may use the App solely for your personal, non-commercial purposes.</p>
+
+            <h2>2. User Accounts</h2>
+            <p>To use certain features, you must register for an account using your email address or third-party authentication (Google or Facebook Login). You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
+
+            <div class="highlight-box">
+                <h3>SMS Permission & Automated Syncing</h3>
+                <p>By enabling SMS Sync, you grant Onyx permission to read incoming transactional SMS messages locally on your device. This data is processed strictly to extract transaction information (amount, vendor, category). The App does not read personal messages, and raw SMS data is never uploaded. You represent that you have the right to allow the App to process these alerts.</p>
+            </div>
+
+            <h2>3. AI Budgeting Assistant Disclaimer</h2>
+            <p>Onyx includes AI-driven features designed to analyze your transaction logs and provide budgeting suggestions, insights, and feedback.</p>
+            <ul>
+                <li><strong>No Financial Advice:</strong> All insights and feedback generated by our AI are for informational and planning purposes only. Onyx does not provide professional, legal, or licensed financial advice.</li>
+                <li><strong>Decisions at Your Own Risk:</strong> You are solely responsible for any financial actions, investments, or budgeting decisions you make based on the feedback provided by the App.</li>
+            </ul>
+
+            <h2>4. Intellectual Property</h2>
+            <p>All content, designs, logos, software, and intellectual property associated with the App are owned by us. You are granted a limited, non-exclusive, non-transferable license to use the App on your mobile device.</p>
+
+            <h2>5. Termination</h2>
+            <p>We reserve the right to suspend or terminate your account or access to the App at any time, without notice, if we believe you have violated these Terms. You may delete your account and stop using the App at any time.</p>
+
+            <h2>6. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, Onyx and its developers shall not be liable for any indirect, incidental, special, consequential, or punitive damages, or any loss of profits or revenues, arising out of your use or inability to use the App.</p>
+
+            <h2>7. Contact Information</h2>
+            <p>If you have any questions, concerns, or feedback regarding these Terms, please contact us at:</p>
+            <ul class="email-list">
+                <li><span class="email-icon">&#9993;</span> <a href="mailto:hamim.leon@gmail.com">hamim.leon@gmail.com</a></li>
+                <li><span class="email-icon">&#9993;</span> <a href="mailto:hamim15-5264@diu.edu.bd">hamim15-5264@diu.edu.bd</a></li>
+            </ul>
+        </div>
+
+        <div class="footer">
+            &copy; 2026 Onyx App. All rights reserved.
+        </div>
+    </div>
+</body>
+</html>
