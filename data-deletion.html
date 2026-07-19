@@ -16,13 +16,14 @@
             --text-muted: #49454f;
             --bg-page: #f8f6fc;
             --card-bg: #ffffff;
-            --divider: #cac4d0;
             --radius-lg: 24px;
             --radius-md: 16px;
         }
 
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -30,7 +31,63 @@
             background-color: var(--bg-page);
             color: var(--text-main);
             line-height: 1.6;
-            margin: 0;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(79, 55, 138, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 20px;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .brand img {
+            width: 32px;
+            height: 32px;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .main-wrapper {
             padding: 40px 20px;
         }
 
@@ -117,7 +174,7 @@
             font-weight: 400;
         }
 
-        ol {
+        ol, ul {
             padding-left: 20px;
         }
 
@@ -188,64 +245,81 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="logo-container">
-                <img class="logo-img" src="logo.png" alt="Onyx Logo">
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="brand">
+                <img src="logo.png" alt="Onyx Logo">
+                <span>Onyx</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="data-deletion.html" class="active">Data Deletion</a>
+                <a href="terms.html">Terms</a>
             </div>
-            <h1>Onyx Data Deletion</h1>
-            <div class="subtitle">Last Updated: July 17, 2026</div>
         </div>
+    </nav>
 
-        <div class="content">
-            <p>At Onyx, we value your privacy and control over your personal data. According to Meta (Facebook) and Google Play Platform rules, you have the right to request the deletion of your account and any associated data synced from third-party social integrations (like Facebook Login).</p>
-
-            <p>Here are the step-by-step instructions on how to request the deletion of your user data:</p>
-
-            <div class="highlight-box">
-                <h3>Method 1: In-App Account Deletion (Recommended)</h3>
-                <p>You can instantly delete all your data directly inside the App:</p>
-                <ol>
-                    <li>Open the <strong>Onyx</strong> app.</li>
-                    <li>Go to the <strong>Profile</strong> tab (person icon in the bottom menu).</li>
-                    <li>Select <strong>Login and security</strong> (or <strong>Data and privacy</strong>).</li>
-                    <li>Tap <strong>Delete Account</strong> and confirm.</li>
-                </ol>
-                <p><em>*Note: This will instantly and permanently delete your profile, transaction logs, and wallet configurations from our database.</em></p>
+    <div class="main-wrapper">
+        <div class="container">
+            <div class="header">
+                <div class="logo-container">
+                    <img class="logo-img" src="logo.png" alt="Onyx Logo">
+                </div>
+                <h1>Onyx Data Deletion</h1>
+                <div class="subtitle">Last Updated: July 17, 2026</div>
             </div>
 
-            <div class="highlight-box">
-                <h3>Method 2: Email Data Deletion Request</h3>
-                <p>If you cannot access the App or wish to request deletion manually, you can email us:</p>
-                <ol>
-                    <li>Send an email to our support team (addresses below).</li>
-                    <li>Subject line: <strong>Onyx Data Deletion Request</strong></li>
-                    <li>In the email body, provide your registered email address or your Facebook User ID associated with the App.</li>
-                </ol>
-                <p>Upon receiving your email, we will permanently purge all your profile information, social tokens, transactional logs, and sync configurations from our servers within <strong>48 hours</strong>. You will receive a confirmation email once the process is complete.</p>
+            <div class="content">
+                <p>At Onyx, we value your privacy and control over your personal data. According to Google Play Platform and social provider rules, you have the right to request the deletion of your account and any associated data synced from social integrations.</p>
+
+                <p>Here are the step-by-step instructions on how to request the deletion of your user data:</p>
+
+                <div class="highlight-box">
+                    <h3>Method 1: In-App Account Deletion (Recommended)</h3>
+                    <p>You can instantly delete all your data directly inside the App:</p>
+                    <ol>
+                        <li>Open the <strong>Onyx</strong> app.</li>
+                        <li>Go to the <strong>Profile</strong> tab (person icon in the top header).</li>
+                        <li>Select <strong>Login and Security</strong> (or <strong>Data and Privacy</strong>).</li>
+                        <li>Tap <strong>Delete Account</strong> and confirm your passcode/credentials.</li>
+                    </ol>
+                    <p><em>*Note: This will instantly and permanently delete your profile, transaction logs, and wallet configurations from our database.</em></p>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>Method 2: Email Data Deletion Request</h3>
+                    <p>If you cannot access the App or wish to request deletion manually, you can email us:</p>
+                    <ol>
+                        <li>Send an email to our support team (addresses below).</li>
+                        <li>Subject line: <strong>Onyx Data Deletion Request</strong></li>
+                        <li>In the email body, provide your registered email address associated with the App.</li>
+                    </ol>
+                    <p>Upon receiving your email, we will permanently purge all your profile information, logged transactions, and sync configurations from our servers within <strong>48 hours</strong>.</p>
+                </div>
+
+                <h2>What Data is Deleted?</h2>
+                <p>When you delete your account, the following information is permanently destroyed from our secure Supabase database:</p>
+                <ul>
+                    <li>Your user account profile (Name, email address, avatar photo).</li>
+                    <li>All logged income, expenses, and transaction history.</li>
+                    <li>All connected wallet information.</li>
+                    <li>Saved security questions and answer hashes.</li>
+                </ul>
+
+                <p>Go back to the <a href="privacy.html">Onyx Privacy Policy</a>.</p>
+
+                <h2>Contact Support</h2>
+                <p>If you have any questions or require manual data deletion support, please contact us at:</p>
+                <ul class="email-list">
+                    <li><span class="email-icon">&#9993;</span> <a href="mailto:hamim.leon@gmail.com">hamim.leon@gmail.com</a></li>
+                </ul>
             </div>
 
-            <h2>What Data is Deleted?</h2>
-            <p>When you delete your account, the following information is permanently destroyed from our Supabase database:</p>
-            <ul>
-                <li>Your user account profile (Name, email address, avatar photo).</li>
-                <li>All logged income, expenses, and budget plans.</li>
-                <li>All connected wallet information.</li>
-                <li>Saved security questions and answer hashes.</li>
-            </ul>
-
-            <p>Go back to the <a href="index.html">Onyx Privacy Policy</a>.</p>
-
-            <h2>Contact Support</h2>
-            <p>If you have any questions or require manual data deletion support, please contact us at:</p>
-            <ul class="email-list">
-                <li><span class="email-icon">&#9993;</span> <a href="mailto:hamim.leon@gmail.com">hamim.leon@gmail.com</a></li>
-                <li><span class="email-icon">&#9993;</span> <a href="mailto:hamim15-5264@diu.edu.bd">hamim15-5264@diu.edu.bd</a></li>
-            </ul>
-        </div>
-
-        <div class="footer">
-            &copy; 2026 Onyx App. All rights reserved.
+            <div class="footer">
+                &copy; 2026 Onyx App. All rights reserved.
+            </div>
         </div>
     </div>
 </body>
