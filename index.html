@@ -4,21 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onyx - Smart Expense Tracker & Local AI Diagnostics</title>
+    <meta name="description" content="A beautiful, fully private cash tracker with automatic local SMS parsing, dynamic themes, and offline financial diagnostics powered by the Onyx AI Engine.">
+    <link rel="icon" type="image/png" href="assets/images/onyx-app-icon.png">
+    
+    <!-- Open Graph / Meta -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://onyx.devenginehq.com/">
+    <meta property="og:title" content="Onyx - Smart Expense Tracker & Local AI Diagnostics">
+    <meta property="og:description" content="Redefine Your Financial Freedom with Onyx. Fully private, offline-first personal financial tracker.">
+    <meta property="og:image" content="assets/images/onyx-feature-graphic.png">
+
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #4f378a;
-            --primary-light: #6750a4;
-            --primary-glow: rgba(79, 55, 138, 0.15);
-            --dark-bg: #0b071a;
+            --primary: #7f56d9;
+            --primary-dark: #4f378a;
+            --primary-light: #9e77ed;
+            --primary-glow: rgba(127, 86, 217, 0.25);
+            --accent-glow: rgba(158, 119, 237, 0.15);
+            --dark-bg: #090514;
+            --dark-surface: #110c24;
+            --dark-surface-elevated: #181133;
             --text-white: #ffffff;
             --text-gray: #a5a1b8;
-            --card-glass: rgba(255, 255, 255, 0.04);
+            --text-muted: #797491;
+            --card-glass: rgba(255, 255, 255, 0.035);
+            --card-glass-hover: rgba(255, 255, 255, 0.07);
             --border-glass: rgba(255, 255, 255, 0.08);
-            --radius-xl: 32px;
+            --border-active: rgba(158, 119, 237, 0.35);
+            --radius-xl: 28px;
             --radius-lg: 20px;
+            --radius-md: 14px;
+            --radius-sm: 10px;
+            --radius-pill: 9999px;
+            --container-max: 1200px;
         }
 
         * {
@@ -27,28 +50,84 @@
             padding: 0;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--dark-bg);
             color: var(--text-white);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Ambient Glow Backgrounds */
+        .ambient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .ambient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.45;
+        }
+
+        .ambient-orb-1 {
+            width: 500px;
+            height: 500px;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: radial-gradient(circle, rgba(127, 86, 217, 0.45) 0%, rgba(79, 55, 138, 0) 70%);
+        }
+
+        .ambient-orb-2 {
+            width: 400px;
+            height: 400px;
+            top: 40%;
+            left: -100px;
+            background: radial-gradient(circle, rgba(79, 55, 138, 0.3) 0%, rgba(9, 5, 20, 0) 70%);
+        }
+
+        .ambient-orb-3 {
+            width: 450px;
+            height: 450px;
+            top: 70%;
+            right: -100px;
+            background: radial-gradient(circle, rgba(158, 119, 237, 0.25) 0%, rgba(9, 5, 20, 0) 70%);
+        }
+
+        /* Container helper */
+        .container {
+            max-width: var(--container-max);
+            margin: 0 auto;
+            padding: 0 24px;
         }
 
         /* Navigation Bar */
         .navbar {
-            background-color: rgba(11, 7, 26, 0.8);
-            backdrop-filter: blur(16px);
+            background-color: rgba(9, 5, 20, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border-glass);
             position: sticky;
             top: 0;
-            z-index: 100;
-            padding: 20px;
+            z-index: 1000;
+            padding: 16px 0;
+            transition: all 0.3s ease;
         }
 
         .nav-container {
-            max-width: 1100px;
-            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -60,22 +139,29 @@
             gap: 12px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
-            font-size: 1.6rem;
+            font-size: 1.55rem;
             color: var(--text-white);
             text-decoration: none;
             letter-spacing: -0.5px;
+            transition: transform 0.2s ease;
+        }
+
+        .brand:hover {
+            transform: scale(1.02);
         }
 
         .brand img {
-            width: 36px;
-            height: 36px;
-            object-fit: contain;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(79, 55, 138, 0.3);
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border-radius: 11px;
+            box-shadow: 0 4px 14px rgba(127, 86, 217, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.12);
         }
 
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 24px;
         }
 
@@ -83,360 +169,1269 @@
             color: var(--text-gray);
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.3s ease;
+            font-size: 0.92rem;
+            transition: color 0.25s ease;
+            position: relative;
+            padding: 6px 2px;
         }
 
-        .nav-links a:hover, .nav-links a.active {
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--text-white);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-light));
+            border-radius: 2px;
+        }
+
+        .nav-cta-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 138px;
+            padding: 11px 36px;
+            border-radius: var(--radius-pill);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 700;
+            line-height: 1;
+            text-decoration: none;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #ffffff !important;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px rgba(127, 86, 217, 0.35);
+            white-space: nowrap;
+        }
+
+        .nav-cta-btn span {
+            display: inline-block;
+            line-height: 1;
+            text-align: center;
+        }
+
+        .nav-cta-btn svg {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 13px;
+            height: 13px;
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+
+        .nav-cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 22px rgba(127, 86, 217, 0.5);
+            border-color: rgba(255, 255, 255, 0.35);
+        }
+
+        .nav-cta-btn:hover svg {
+            transform: translate(2px, calc(-50% - 2px));
+        }
+
+        /* Mobile Hamburger Toggle */
+        .mobile-menu-btn {
+            display: none;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-glass);
+            color: var(--text-white);
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .mobile-menu-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+
+        .mobile-menu-btn svg {
+            width: 24px;
+            height: 24px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
+            stroke-linecap: round;
+        }
+
+        /* Mobile Menu Drawer */
+        .mobile-drawer {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            background-color: var(--dark-surface);
+            border-top: 1px solid var(--border-glass);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 20px 24px;
+            animation: fadeInDown 0.25s ease forwards;
+        }
+
+        .mobile-drawer.open {
+            display: flex;
+        }
+
+        .mobile-drawer a {
+            color: var(--text-gray);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 10px 14px;
+            border-radius: var(--radius-sm);
+            background: rgba(255, 255, 255, 0.02);
+            transition: all 0.2s ease;
+        }
+
+        .mobile-drawer a:hover,
+        .mobile-drawer a.active {
+            color: var(--text-white);
+            background: rgba(127, 86, 217, 0.15);
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* Hero Section */
         .hero {
             position: relative;
-            padding: 120px 20px 80px;
+            padding: 80px 0 60px;
             text-align: center;
-            max-width: 900px;
+        }
+
+        .hero-inner {
+            max-width: 880px;
             margin: 0 auto;
         }
 
-        .hero-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(79, 55, 138, 0.4) 0%, rgba(11, 7, 26, 0) 70%);
-            z-index: -1;
-            filter: blur(40px);
-        }
-
-        .badge {
+        .badge-pill {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
-            background-color: rgba(79, 55, 138, 0.25);
-            border: 1px solid rgba(79, 55, 138, 0.4);
-            padding: 8px 18px;
-            border-radius: 100px;
+            gap: 10px;
+            background: rgba(127, 86, 217, 0.16);
+            border: 1px solid rgba(158, 119, 237, 0.35);
+            padding: 8px 20px;
+            border-radius: var(--radius-pill);
             font-size: 0.85rem;
             font-weight: 700;
             color: #d1bcff;
-            margin-bottom: 24px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-bottom: 28px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 16px rgba(127, 86, 217, 0.12);
+        }
+
+        .badge-pill .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #6ee7b7;
+            box-shadow: 0 0 10px #6ee7b7;
         }
 
         .hero h1 {
             font-family: 'Outfit', sans-serif;
-            font-size: 4rem;
-            line-height: 1.1;
+            font-size: clamp(2.3rem, 5.5vw, 4.2rem);
+            line-height: 1.12;
             font-weight: 900;
             letter-spacing: -1.5px;
             margin-bottom: 24px;
-            background: linear-gradient(135deg, #ffffff 0%, #d1bcff 100%);
+            background: linear-gradient(135deg, #ffffff 10%, #d1bcff 60%, #9e77ed 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.8rem;
-            }
-        }
-
         .hero p {
-            font-size: 1.25rem;
+            font-size: clamp(1rem, 2vw, 1.25rem);
             color: var(--text-gray);
-            max-width: 700px;
-            margin: 0 auto 40px;
+            max-width: 720px;
+            margin: 0 auto 36px;
             font-weight: 400;
+            line-height: 1.7;
         }
 
-        /* Play Store Button */
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+
+        /* Play Store Primary CTA */
         .btn-playstore {
             display: inline-flex;
             align-items: center;
-            gap: 16px;
-            background-color: var(--text-white);
-            color: var(--dark-bg);
-            padding: 16px 32px;
-            border-radius: 100px;
+            gap: 14px;
+            background: linear-gradient(135deg, #ffffff 0%, #ede9fe 100%);
+            color: #0d0722;
+            padding: 14px 30px;
+            border-radius: var(--radius-pill);
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             text-decoration: none;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.15);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 28px rgba(255, 255, 255, 0.18);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         .btn-playstore:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 35px rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 16px 36px rgba(158, 119, 237, 0.35);
+            color: #000000;
         }
 
-        .btn-playstore svg {
-            width: 24px;
-            height: 24px;
+        .btn-playstore img {
+            width: 26px;
+            height: 26px;
+            object-fit: contain;
         }
 
-        /* Features Section */
-        .section-features {
-            max-width: 1100px;
-            margin: 60px auto;
-            padding: 0 20px;
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-white);
+            padding: 14px 26px;
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            border: 1px solid var(--border-glass);
+            transition: all 0.25s ease;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        /* Trust Chips */
+        .trust-chips {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .trust-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Hero App Showcase (Phone Mockup) */
+        .hero-mockup-wrap {
+            margin-top: 50px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .phone-frame {
+            position: relative;
+            max-width: 320px;
+            width: 100%;
+            border-radius: 44px;
+            padding: 10px;
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.2) 0%, rgba(127, 86, 217, 0.15) 50%, rgba(9, 5, 20, 0.9) 100%);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 50px rgba(127, 86, 217, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .phone-frame:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 32px 70px rgba(0, 0, 0, 0.8), 0 0 70px rgba(158, 119, 237, 0.35);
+        }
+
+        .phone-screen {
+            border-radius: 34px;
+            overflow: hidden;
+            background-color: #000000;
+            display: block;
+            line-height: 0;
+        }
+
+        .phone-screen img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Floating Feature Chips around Phone */
+        .floating-chip {
+            position: absolute;
+            background: rgba(17, 12, 36, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(158, 119, 237, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 12px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
+            z-index: 10;
+            animation: floatSlow 4s ease-in-out infinite alternate;
+        }
+
+        .floating-chip-1 {
+            top: 20%;
+            left: max(5%, calc(50% - 360px));
+        }
+
+        .floating-chip-2 {
+            bottom: 20%;
+            right: max(5%, calc(50% - 360px));
+            animation-delay: -2s;
+        }
+
+        .chip-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: rgba(127, 86, 217, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: #d1bcff;
+        }
+
+        .chip-text {
+            text-align: left;
+        }
+
+        .chip-title {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+
+        .chip-sub {
+            font-size: 0.75rem;
+            color: var(--text-gray);
+        }
+
+        @keyframes floatSlow {
+            0% {
+                transform: translateY(0px);
+            }
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Banner Design Section */
+        .section-banner {
+            padding: 50px 0 30px;
+        }
+
+        .banner-card {
+            background: var(--dark-surface);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 40px rgba(127, 86, 217, 0.15);
+            transition: border-color 0.3s ease;
+        }
+
+        .banner-card:hover {
+            border-color: var(--border-active);
+        }
+
+        .banner-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        /* Section Headings */
+        .section-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 50px;
+        }
+
+        .section-tag {
+            display: inline-block;
+            font-size: 0.82rem;
+            font-weight: 800;
+            color: #d1bcff;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+            background: rgba(127, 86, 217, 0.15);
+            padding: 5px 14px;
+            border-radius: 100px;
+            border: 1px solid rgba(158, 119, 237, 0.2);
         }
 
         .section-title {
             font-family: 'Outfit', sans-serif;
-            text-align: center;
-            font-size: 2.2rem;
-            margin-bottom: 48px;
-            letter-spacing: -0.5px;
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.8px;
+            margin-bottom: 16px;
+        }
+
+        .section-subtitle {
+            color: var(--text-gray);
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+
+        /* Screenshots Showcase Section */
+        .section-screenshots {
+            padding: 80px 0;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .screenshot-card {
+            background-color: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.35s ease;
+            position: relative;
+        }
+
+        .screenshot-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--border-active);
+            background-color: var(--card-glass-hover);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(127, 86, 217, 0.2);
+        }
+
+        .screenshot-img-box {
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #000;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screenshot-img-box img {
+            width: 100%;
+            height: auto;
+            max-height: 480px;
+            object-fit: contain;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .screenshot-card:hover .screenshot-img-box img {
+            transform: scale(1.02);
+        }
+
+        .screenshot-info h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .screenshot-info p {
+            color: var(--text-gray);
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        /* Features Section */
+        .section-features {
+            padding: 70px 0;
         }
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 24px;
         }
 
         .feature-card {
             background-color: var(--card-glass);
             border: 1px solid var(--border-glass);
-            padding: 32px;
+            padding: 34px 28px;
             border-radius: var(--radius-lg);
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .feature-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(79, 55, 138, 0.3);
-            background-color: rgba(255, 255, 255, 0.06);
+            transform: translateY(-6px);
+            border-color: rgba(158, 119, 237, 0.3);
+            background-color: var(--card-glass-hover);
+            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
         }
 
         .feature-icon {
-            width: 48px;
-            height: 48px;
-            background-color: rgba(79, 55, 138, 0.15);
-            border-radius: 12px;
+            width: 52px;
+            height: 52px;
+            background: rgba(127, 86, 217, 0.15);
+            border: 1px solid rgba(158, 119, 237, 0.25);
+            border-radius: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #d1bcff;
             font-size: 1.5rem;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
+            color: #d1bcff;
         }
 
         .feature-card h3 {
             font-family: 'Outfit', sans-serif;
             font-size: 1.3rem;
             margin-bottom: 12px;
-            font-weight: 600;
+            font-weight: 700;
+            color: #ffffff;
         }
 
         .feature-card p {
             color: var(--text-gray);
             font-size: 0.95rem;
+            line-height: 1.65;
         }
 
-        /* Developer Section */
-        .developer-section {
-            background-color: rgba(79, 55, 138, 0.08);
+        /* Company & Developer Section */
+        .section-company {
+            padding: 90px 0;
+            background: linear-gradient(180deg, rgba(17, 12, 36, 0.4) 0%, rgba(9, 5, 20, 0.9) 100%);
             border-top: 1px solid var(--border-glass);
             border-bottom: 1px solid var(--border-glass);
-            padding: 80px 20px;
-            margin-top: 80px;
         }
 
-        .dev-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
+        .company-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 36px;
+            align-items: stretch;
         }
 
-        .dev-badge {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+        .company-card, .dev-card {
+            background: var(--card-glass);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-xl);
+            padding: 40px 36px;
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--text-white);
-            margin: 0 auto 24px;
-            box-shadow: 0 8px 24px rgba(79, 55, 138, 0.3);
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s ease;
         }
 
-        .dev-name {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.8rem;
+        .company-card:hover, .dev-card:hover {
+            border-color: var(--border-active);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 25px rgba(127, 86, 217, 0.15);
+        }
+
+        .company-logo-wrap {
+            max-width: 220px;
+            margin-bottom: 20px;
+        }
+
+        .company-logo-wrap img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .card-badge {
+            display: inline-block;
+            font-size: 0.8rem;
             font-weight: 700;
-            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #d1bcff;
+            background: rgba(127, 86, 217, 0.18);
+            padding: 5px 12px;
+            border-radius: 100px;
+            margin-bottom: 16px;
         }
 
-        .dev-title {
+        .company-title, .dev-name {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.7rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .dev-role {
             color: #d1bcff;
             font-weight: 600;
-            margin-bottom: 16px;
-            letter-spacing: 0.5px;
+            font-size: 0.98rem;
+            margin-bottom: 14px;
         }
 
-        .dev-links {
+        .card-desc {
+            color: var(--text-gray);
+            font-size: 0.96rem;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .button-group {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 16px;
-            margin-top: 24px;
+            gap: 12px;
+            margin-top: auto;
         }
 
-        .dev-links a {
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background-color: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-glass);
             color: var(--text-white);
-            padding: 10px 20px;
-            border-radius: 100px;
+            padding: 10px 18px;
+            border-radius: var(--radius-pill);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 600;
-            transition: background-color 0.3s ease, border-color 0.3s ease;
+            transition: all 0.25s ease;
         }
 
-        .dev-links a:hover {
-            background-color: rgba(79, 55, 138, 0.2);
-            border-color: rgba(79, 55, 138, 0.4);
+        .action-link:hover {
+            background-color: rgba(127, 86, 217, 0.25);
+            border-color: rgba(158, 119, 237, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .action-link.primary-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .action-link.primary-btn:hover {
+            box-shadow: 0 4px 16px rgba(127, 86, 217, 0.4);
+        }
+
+        /* Download Section CTA Banner */
+        .section-cta {
+            padding: 70px 0 90px;
+        }
+
+        .cta-box {
+            background: linear-gradient(135deg, rgba(79, 55, 138, 0.35) 0%, rgba(17, 12, 36, 0.8) 100%);
+            border: 1px solid rgba(158, 119, 237, 0.3);
+            border-radius: var(--radius-xl);
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 50px rgba(127, 86, 217, 0.2);
+        }
+
+        .cta-box h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-box p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto 32px;
         }
 
         /* Footer */
         .footer {
-            padding: 40px 20px;
-            text-align: center;
+            padding: 60px 0 30px;
             border-top: 1px solid var(--border-glass);
+            background-color: #070310;
         }
 
-        .footer-links {
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand-col p {
+            color: var(--text-gray);
+            font-size: 0.92rem;
+            max-width: 380px;
+            margin: 16px 0 20px;
+            line-height: 1.6;
+        }
+
+        .footer-col h4 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #ffffff;
+        }
+
+        .footer-col ul {
+            list-style: none;
             display: flex;
-            justify-content: center;
-            gap: 24px;
-            margin-bottom: 20px;
+            flex-direction: column;
+            gap: 10px;
         }
 
-        .footer-links a {
+        .footer-col a {
             color: var(--text-gray);
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            font-size: 0.92rem;
+            transition: color 0.2s ease;
         }
 
-        .footer-links a:hover {
-            color: var(--text-white);
+        .footer-col a:hover {
+            color: var(--primary-light);
         }
 
-        .footer-copyright {
-            color: rgba(165, 161, 184, 0.5);
-            font-size: 0.85rem;
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+            color: var(--text-muted);
+            font-size: 0.86rem;
+        }
+
+        .footer-bottom a {
+            color: #d1bcff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer-bottom a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1024px) {
+            .screenshots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .screenshot-card:nth-child(3) {
+                grid-column: span 2;
+            }
+            .company-grid {
+                grid-template-columns: 1fr;
+            }
+            .floating-chip {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 0;
+            }
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: inline-flex;
+            }
+            .hero {
+                padding: 50px 0 40px;
+            }
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .hero p {
+                font-size: 1.02rem;
+                margin-bottom: 28px;
+            }
+            .hero-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn-playstore, .btn-secondary {
+                width: 100%;
+                justify-content: center;
+            }
+            .phone-frame {
+                max-width: 280px;
+            }
+            .screenshots-grid {
+                grid-template-columns: 1fr;
+            }
+            .screenshot-card:nth-child(3) {
+                grid-column: span 1;
+            }
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+            .cta-box {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 16px;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .brand span {
+                font-size: 1.35rem;
+            }
+            .company-card, .dev-card {
+                padding: 26px 20px;
+            }
+            .company-title, .dev-name {
+                font-size: 1.4rem;
+            }
+            .phone-frame {
+                max-width: 250px;
+                border-radius: 36px;
+            }
+            .phone-screen {
+                border-radius: 28px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Ambient Background Lighting -->
+    <div class="ambient-bg">
+        <div class="ambient-orb ambient-orb-1"></div>
+        <div class="ambient-orb ambient-orb-2"></div>
+        <div class="ambient-orb ambient-orb-3"></div>
+    </div>
+
     <!-- Navigation Bar -->
     <nav class="navbar">
-        <div class="nav-container">
+        <div class="container nav-container">
             <a href="index.html" class="brand">
-                <img src="logo.png" alt="Onyx Logo">
+                <img src="assets/images/onyx-app-icon.png" alt="Onyx App Icon">
                 <span>Onyx</span>
             </a>
+
+            <!-- Desktop Nav Links -->
             <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
+                <a href="#features">Features</a>
+                <a href="#showcase">Showcase</a>
+                <a href="#company">Company</a>
                 <a href="privacy.html">Privacy Policy</a>
-                <a href="data-deletion.html">Data Deletion</a>
                 <a href="terms.html">Terms</a>
+                <a href="https://play.google.com/store/apps/details?id=com.thedevhamim.onyx" target="_blank" rel="noopener noreferrer" class="nav-cta-btn">
+                    <span>Get App</span>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+                </a>
             </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button class="mobile-menu-btn" id="mobileMenuToggle" aria-label="Toggle navigation menu">
+                <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer Menu -->
+        <div class="mobile-drawer" id="mobileDrawer">
+            <a href="#features" class="mobile-nav-link">Features</a>
+            <a href="#showcase" class="mobile-nav-link">Showcase</a>
+            <a href="#company" class="mobile-nav-link">Company</a>
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="data-deletion.html">Data Deletion</a>
+            <a href="https://play.google.com/store/apps/details?id=com.thedevhamim.onyx" target="_blank" rel="noopener noreferrer" style="background: rgba(127, 86, 217, 0.3); color: #ffffff; text-align: center; font-weight: 700;">
+                Download on Google Play
+            </a>
         </div>
     </nav>
 
     <!-- Hero Section -->
     <header class="hero">
-        <div class="hero-glow"></div>
-        <div class="badge">
-            <span>✨ Premium Offline-First App</span>
+        <div class="container hero-inner">
+            <div class="badge-pill">
+                <span class="pulse-dot"></span>
+                <span>✨ Premium Offline-First App &bull; Local AI</span>
+            </div>
+
+            <h1>Redefine Your Financial Freedom</h1>
+            
+            <p>
+                A beautiful, fully private cash tracker equipped with automatic local SMS parsing, dynamic visual themes, and smart financial diagnostics powered by the Onyx AI Engine.
+            </p>
+
+            <div class="hero-actions">
+                <a href="https://play.google.com/store/apps/details?id=com.thedevhamim.onyx" target="_blank" rel="noopener noreferrer" class="btn-playstore">
+                    <img src="assets/images/playstore.png" alt="Google Play Store Icon">
+                    <span>Download on Google Play</span>
+                </a>
+                <a href="#showcase" class="btn-secondary">
+                    <span>View Screenshots</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 13l5 5 5-5M12 4v14"/></svg>
+                </a>
+            </div>
+
+            <div class="trust-chips">
+                <span class="trust-chip">🛡️ 100% Private</span>
+                <span class="trust-chip">&bull;</span>
+                <span class="trust-chip">⚡ Offline-First</span>
+                <span class="trust-chip">&bull;</span>
+                <span class="trust-chip">🚫 Zero Ads</span>
+                <span class="trust-chip">&bull;</span>
+                <span class="trust-chip">🤖 On-Device AI</span>
+            </div>
+
+            <!-- Phone Showcase Mockup -->
+            <div class="hero-mockup-wrap">
+                <!-- Floating Indicator 1 -->
+                <div class="floating-chip floating-chip-1">
+                    <div class="chip-icon">🤖</div>
+                    <div class="chip-text">
+                        <div class="chip-title">Onyx AI Diagnostics</div>
+                        <div class="chip-sub">100% Local Device Inference</div>
+                    </div>
+                </div>
+
+                <!-- Smartphone Frame with Screenshot 1 -->
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <img src="assets/images/onyx-phone-1.png" alt="Onyx App Interface Screenshot">
+                    </div>
+                </div>
+
+                <!-- Floating Indicator 2 -->
+                <div class="floating-chip floating-chip-2">
+                    <div class="chip-icon">📬</div>
+                    <div class="chip-text">
+                        <div class="chip-title">Auto SMS Parsing</div>
+                        <div class="chip-sub">Secure & Private Bank Intake</div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <h1>Redefine Your Financial Freedom</h1>
-        <p>A beautiful, fully private cash tracker equipped with automatic local SMS parsing, dynamic visual themes, and smart financial diagnostics powered by the Onyx AI Engine.</p>
-        <a href="https://play.google.com/store/apps/details?id=com.thedevhamim.onyx" target="_blank" class="btn-playstore">
-            <img src="playstore.png" alt="Google Play Icon" style="width: 24px; height: 24px; object-fit: contain;">
-            <span>Download on Google Play</span>
-        </a>
     </header>
 
+    <!-- Feature Graphic Banner Section -->
+    <section class="section-banner">
+        <div class="container">
+            <div class="banner-card">
+                <img src="assets/images/onyx-feature-graphic.png" alt="Onyx Official Google Play Feature Graphic">
+            </div>
+        </div>
+    </section>
+
+    <!-- App Screenshots Showcase Section -->
+    <section class="section-screenshots" id="showcase">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Visual Walkthrough</span>
+                <h2 class="section-title">Engineered for Elegance & Speed</h2>
+                <p class="section-subtitle">
+                    Explore Onyx across both smartphone and tablet form factors. Enjoy smooth transitions, intuitive controls, and high-density financial data.
+                </p>
+            </div>
+
+            <div class="screenshots-grid">
+                <!-- Screenshot 1 -->
+                <div class="screenshot-card">
+                    <div class="screenshot-img-box">
+                        <img src="assets/images/onyx-phone-1.png" alt="Onyx Smart Spending & Ledger">
+                    </div>
+                    <div class="screenshot-info">
+                        <h3>Smart Spending & Wallets</h3>
+                        <p>Track cash flow across custom wallets, categorized expenses, and automatic transaction detection in real time.</p>
+                    </div>
+                </div>
+
+                <!-- Screenshot 2 -->
+                <div class="screenshot-card">
+                    <div class="screenshot-img-box">
+                        <img src="assets/images/onyx-phone-2.png" alt="Onyx AI Diagnostic Engine">
+                    </div>
+                    <div class="screenshot-info">
+                        <h3>Onyx AI Diagnostic Engine</h3>
+                        <p>Gain automated financial health scores, burn-rate forecasts, and actionable liquidity advice completely offline.</p>
+                    </div>
+                </div>
+
+                <!-- Screenshot 3 (Tablet) -->
+                <div class="screenshot-card">
+                    <div class="screenshot-img-box">
+                        <img src="assets/images/onyx-tablet.png" alt="Onyx Tablet & Multidevice View">
+                    </div>
+                    <div class="screenshot-info">
+                        <h3>Expanded Tablet Dashboard</h3>
+                        <p>Optimized for larger screens. Generate high-resolution PDF spreadsheets and inspect multi-month ledger breakdowns.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Features Grid -->
-    <section class="section-features">
-        <h2 class="section-title">Why Choose Onyx?</h2>
-        <div class="feature-grid">
-            <div class="feature-card">
-                <div class="feature-icon">📬</div>
-                <h3>Local SMS Auto-Parsing</h3>
-                <p>Optionally syncs and parses bank receipts locally on your device. Your raw SMS text files never leave your phone.</p>
+    <section class="section-features" id="features">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Key Features</span>
+                <h2 class="section-title">Why Choose Onyx?</h2>
+                <p class="section-subtitle">
+                    Every feature in Onyx is crafted with a privacy-first mindset, giving you sovereign ownership over your financial logs.
+                </p>
             </div>
-            <div class="feature-card">
-                <div class="feature-icon">🧠</div>
-                <h3>Onyx AI Engine (Beta)</h3>
-                <p>Run intelligent budget analysis, savings diagnostics, and liquidity reports offline in real-time.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3>Dynamic Themes</h3>
-                <p>Swap between 6 curated, app-wide brand color templates that cache securely across device restarts.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📄</div>
-                <h3>PDF Financial Statements</h3>
-                <p>Export elegant, printable monthly transaction spreadsheets and ledger sheets offline instantly.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔔</div>
-                <h3>In-App Notifications</h3>
-                <p>Clean, actionable internal alert notifications for category budget milestones and warning triggers.</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🔒</div>
-                <h3>Offline-First Security</h3>
-                <p>Fully encrypted SQLite/Hive local storage that syncs securely to Supabase. Absolute ownership of your raw records.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📬</div>
+                    <h3>Local SMS Auto-Parsing</h3>
+                    <p>Optionally scans bank alerts locally on your device to log expenses instantly. Raw messages never leave your phone.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Onyx AI Engine (Beta)</h3>
+                    <p>Run intelligent budget analysis, savings diagnostics, and liquidity reports completely offline with zero latency.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Dynamic Themes</h3>
+                    <p>Switch between 6 curated, app-wide brand color templates that cache securely across device restarts.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>PDF Financial Statements</h3>
+                    <p>Export elegant, printable monthly transaction spreadsheets and ledger sheets offline whenever you need them.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔔</div>
+                    <h3>In-App Notifications</h3>
+                    <p>Receive clean, actionable internal notifications for category budget limits and warning milestones.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Offline-First Security</h3>
+                    <p>Fully encrypted local storage with seamless, secure Supabase cloud sync when you choose to connect.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Developer Section -->
-    <section class="developer-section">
-        <div class="dev-container">
-            <div class="dev-badge">AL</div>
-            <h2 class="dev-name">Abdul Hamim Leon</h2>
-            <p class="dev-title">Lead Software Developer</p>
-            <p style="color: var(--text-gray); max-width: 600px; margin: 0 auto 20px;">Independently engineering high-performance, private-first mobile applications with elegant designs and intelligent offline tools.</p>
-            
-            <div class="dev-links">
-                <a href="https://thedevhamim.vercel.app/" target="_blank">Portfolio</a>
-                <a href="https://github.com/hamim5264" target="_blank">GitHub</a>
-                <a href="https://www.linkedin.com/in/abdul-hamim-a35b02253/" target="_blank">LinkedIn</a>
-                <a href="https://devengine-three.vercel.app/" target="_blank">Business Site</a>
+    <!-- Company & Developer Section -->
+    <section class="section-company" id="company">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Behind Onyx</span>
+                <h2 class="section-title">Built with Pride by DevEngine</h2>
+                <p class="section-subtitle">
+                    DevEngine engineers intelligent, privacy-first software products designed to give users control of their digital lives.
+                </p>
+            </div>
+
+            <div class="company-grid">
+                <!-- Company Card -->
+                <div class="company-card">
+                    <div>
+                        <div class="company-logo-wrap">
+                            <img src="assets/images/devengine-logo.png" alt="DevEngine Official Logo">
+                        </div>
+                        <span class="card-badge">Engineering Studio</span>
+                        <h3 class="company-title">DevEngine</h3>
+                        <p class="card-desc">
+                            DevEngine specializes in crafting high-impact digital experiences, robust mobile applications, and intelligent cloud systems. Onyx is engineered under DevEngine's core mission of speed, privacy, and architectural excellence.
+                        </p>
+                    </div>
+
+                    <div class="button-group">
+                        <a href="https://devenginehq.com" target="_blank" rel="noopener noreferrer" class="action-link primary-btn">
+                            <span>Visit devenginehq.com</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+                        </a>
+                        <a href="mailto:support.thedevhamim@gmail.com" class="action-link">
+                            <span>Contact DevEngine</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Developer Card -->
+                <div class="dev-card">
+                    <div>
+                        <span class="card-badge">Lead Developer</span>
+                        <h3 class="dev-name">Abdul Hamim Leon</h3>
+                        <div class="dev-role">Software Architect & Mobile Engineer</div>
+                        <p class="card-desc">
+                            Independently engineering high-performance, private-first mobile applications with modern design systems and offline-first intelligence. Creator and lead developer behind Onyx and its local AI framework.
+                        </p>
+                    </div>
+
+                    <div class="button-group">
+                        <a href="https://hamim.devenginehq.com" target="_blank" rel="noopener noreferrer" class="action-link primary-btn">
+                            <span>Portfolio (hamim.devenginehq.com)</span>
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+                        </a>
+                        <a href="https://github.com/hamim5264" target="_blank" rel="noopener noreferrer" class="action-link">
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/abdul-hamim-a35b02253/" target="_blank" rel="noopener noreferrer" class="action-link">
+                            <span>LinkedIn</span>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer Links -->
+    <!-- Download Section CTA Banner -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Take Control of Your Expenses Today</h2>
+                <p>Download Onyx on Google Play and start tracking your wealth with offline AI intelligence and zero privacy compromises.</p>
+                <a href="https://play.google.com/store/apps/details?id=com.thedevhamim.onyx" target="_blank" rel="noopener noreferrer" class="btn-playstore">
+                    <img src="assets/images/playstore.png" alt="Google Play Store Icon">
+                    <span>Get Onyx on Google Play</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="footer">
-        <div class="footer-links">
-            <a href="privacy.html">Privacy Policy</a>
-            <a href="data-deletion.html">Data Deletion</a>
-            <a href="terms.html">Terms of Service</a>
-        </div>
-        <div class="footer-copyright">
-            &copy; 2026 Onyx App. All rights reserved. Built with pride by DevEngine.
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand-col">
+                    <a href="index.html" class="brand">
+                        <img src="assets/images/onyx-app-icon.png" alt="Onyx App Icon">
+                        <span>Onyx</span>
+                    </a>
+                    <p>
+                        A product of <a href="https://devenginehq.com" target="_blank" rel="noopener noreferrer" style="color: #d1bcff; font-weight: 600;">DevEngine</a>. Private-first offline cash tracking, local SMS receipt intake, and offline artificial intelligence.
+                    </p>
+                    <div style="font-size: 0.9rem; color: var(--text-gray);">
+                        Support: <a href="mailto:support.thedevhamim@gmail.com" style="color: #ffffff; text-decoration: underline;">support.thedevhamim@gmail.com</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#showcase">Showcase</a></li>
+                        <li><a href="#company">Company</a></li>
+                        <li><a href="https://hamim.devenginehq.com" target="_blank" rel="noopener noreferrer">Developer Portfolio</a></li>
+                        <li><a href="https://devenginehq.com" target="_blank" rel="noopener noreferrer">DevEngine Studio</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Legal & Policy</h4>
+                    <ul>
+                        <li><a href="privacy.html">Privacy Policy</a></li>
+                        <li><a href="terms.html">Terms of Service</a></li>
+                        <li><a href="data-deletion.html">Data Deletion</a></li>
+                        <li><a href="https://play.google.com/store/apps/details?id=com.thedevhamim.onyx" target="_blank" rel="noopener noreferrer">Google Play Store</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div>
+                    &copy; 2026 Onyx App. All rights reserved.
+                </div>
+                <div>
+                    Engineered with pride by <a href="https://devenginehq.com" target="_blank" rel="noopener noreferrer">DevEngine</a> &bull; Lead Developer <a href="https://hamim.devenginehq.com" target="_blank" rel="noopener noreferrer">Abdul Hamim Leon</a>
+                </div>
+            </div>
         </div>
     </footer>
+
+    <!-- Mobile Drawer Script -->
+    <script>
+        const mobileToggle = document.getElementById('mobileMenuToggle');
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (mobileToggle && mobileDrawer) {
+            mobileToggle.addEventListener('click', () => {
+                mobileDrawer.classList.toggle('open');
+            });
+
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileDrawer.classList.remove('open');
+                });
+            });
+        }
+    </script>
 </body>
 </html>

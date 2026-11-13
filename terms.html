@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Onyx - Terms of Service</title>
+    <link rel="icon" type="image/png" href="assets/images/onyx-app-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -31,17 +32,21 @@
             background-color: var(--bg-page);
             color: var(--text-main);
             line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* Navigation Bar */
         .navbar {
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border-bottom: 1px solid rgba(79, 55, 138, 0.08);
             position: sticky;
             top: 0;
             z-index: 100;
             padding: 15px 20px;
+            transition: all 0.3s ease;
         }
 
         .nav-container {
@@ -50,28 +55,32 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 16px;
         }
 
         .brand {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-family: 'Outfit', sans-serif;
             font-weight: 800;
             font-size: 1.5rem;
             color: var(--primary);
             text-decoration: none;
+            letter-spacing: -0.5px;
         }
 
         .brand img {
-            width: 32px;
-            height: 32px;
-            object-fit: contain;
-            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            object-fit: cover;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(79, 55, 138, 0.2);
         }
 
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 20px;
         }
 
@@ -85,6 +94,7 @@
 
         .nav-links a:hover, .nav-links a.active {
             color: var(--primary);
+            font-weight: 600;
         }
 
         .main-wrapper {
@@ -106,6 +116,7 @@
             background: linear-gradient(135deg, var(--primary) 0%, #311B92 100%);
             padding: 50px 30px;
             color: white;
+            position: relative;
         }
 
         .logo-container {
@@ -118,14 +129,15 @@
             align-items: center;
             justify-content: center;
             backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.25);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
         }
 
         .logo-img {
-            width: 80px;
-            height: 80px;
-            object-fit: contain;
+            width: 76px;
+            height: 76px;
+            object-fit: cover;
             border-radius: 18px;
         }
 
@@ -135,6 +147,7 @@
             margin: 0 0 10px;
             font-weight: 700;
             letter-spacing: -0.5px;
+            word-break: break-word;
         }
 
         .subtitle {
@@ -150,7 +163,7 @@
         h2 {
             font-family: 'Outfit', sans-serif;
             color: var(--primary);
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             margin-top: 35px;
             margin-bottom: 15px;
             font-weight: 600;
@@ -166,12 +179,14 @@
             background-color: var(--primary-light);
             margin-right: 10px;
             border-radius: 2px;
+            flex-shrink: 0;
         }
 
         p, li {
             font-size: 1rem;
             color: var(--text-muted);
             font-weight: 400;
+            line-height: 1.7;
         }
 
         ul {
@@ -184,11 +199,25 @@
 
         .footer {
             background-color: #faf9fc;
-            padding: 30px;
+            padding: 30px 20px;
             text-align: center;
             font-size: 0.9rem;
             color: #79747e;
             border-top: 1px solid rgba(79, 55, 138, 0.08);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .footer a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            text-decoration: underline;
         }
 
         a {
@@ -202,6 +231,98 @@
             color: var(--primary);
             text-decoration: underline;
         }
+
+        .email-list {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 12px;
+        }
+
+        .email-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            font-weight: 500;
+            word-break: break-all;
+        }
+
+        .email-icon {
+            margin-right: 8px;
+            color: var(--primary-light);
+            flex-shrink: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 12px 16px;
+            }
+            .nav-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 10px 16px;
+            }
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+            .main-wrapper {
+                padding: 24px 16px;
+            }
+            .content {
+                padding: 28px 20px;
+            }
+            .header {
+                padding: 40px 20px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h2 {
+                font-size: 1.3rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .nav-links {
+                gap: 8px 12px;
+            }
+            .nav-links a {
+                font-size: 0.85rem;
+                padding: 4px 8px;
+                background: rgba(79, 55, 138, 0.05);
+                border-radius: 6px;
+            }
+            .main-wrapper {
+                padding: 16px 10px;
+            }
+            .content {
+                padding: 22px 16px;
+            }
+            .header {
+                padding: 32px 14px;
+            }
+            h1 {
+                font-size: 1.65rem;
+            }
+            .logo-container {
+                width: 72px;
+                height: 72px;
+                border-radius: 18px;
+            }
+            .logo-img {
+                width: 60px;
+                height: 60px;
+                border-radius: 14px;
+            }
+            p, li {
+                font-size: 0.95rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -209,7 +330,7 @@
     <nav class="navbar">
         <div class="nav-container">
             <a href="index.html" class="brand">
-                <img src="logo.png" alt="Onyx Logo">
+                <img src="assets/images/onyx-app-icon.png" alt="Onyx Logo">
                 <span>Onyx</span>
             </a>
             <div class="nav-links">
@@ -225,7 +346,7 @@
         <div class="container">
             <div class="header">
                 <div class="logo-container">
-                    <img class="logo-img" src="logo.png" alt="Onyx Logo">
+                    <img class="logo-img" src="assets/images/onyx-app-icon.png" alt="Onyx Logo">
                 </div>
                 <h1>Terms of Service</h1>
                 <div class="subtitle">Effective Date: July 17, 2026</div>
@@ -244,14 +365,21 @@
                 <p>To use certain features, you must sign in via supported OAuth social logins (Google/Facebook) or email. You are responsible for keeping your password/passcode confidential and secure. You agree to immediately notify us of any unauthorized use of your account.</p>
 
                 <h2>4. Intellectual Property</h2>
-                <p>All brand marks, graphics, custom header designs, codebase, animations, and logos associated with Onyx are the exclusive intellectual property of the App developer (Abdul Hamim Leon) and protected under trademark laws.</p>
+                <p>All brand marks, graphics, custom header designs, codebase, animations, and logos associated with Onyx are the exclusive intellectual property of <strong>DevEngine</strong> and the Lead Developer (<strong>Abdul Hamim Leon</strong>) and protected under applicable copyright and trademark laws.</p>
 
                 <h2>5. Disclaimer of Warranties</h2>
                 <p>The App is provided on an "as-is" and "as-available" basis. We make no warranty that the App will meet your expectations or operate error-free. Financial summaries and AI insights generated by the App are for general informational purposes only and do not constitute certified professional financial advice.</p>
+
+                <h2>6. Inquiries & Support</h2>
+                <p>If you have any questions concerning these Terms of Service, please reach out to us at:</p>
+                <ul class="email-list">
+                    <li><span class="email-icon">&#9993;</span> <a href="mailto:support.thedevhamim@gmail.com">support.thedevhamim@gmail.com</a></li>
+                </ul>
             </div>
 
             <div class="footer">
-                &copy; 2026 Onyx App. All rights reserved.
+                <div>&copy; 2026 Onyx App. All rights reserved.</div>
+                <div>Developed by <a href="https://devenginehq.com" target="_blank" rel="noopener noreferrer">DevEngine</a> &bull; Lead Developer <a href="https://hamim.devenginehq.com" target="_blank" rel="noopener noreferrer">Abdul Hamim Leon</a></div>
             </div>
         </div>
     </div>
