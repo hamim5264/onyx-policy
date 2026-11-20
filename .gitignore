@@ -1,0 +1,9 @@
+# Secrets - NEVER commit
+.env
+.env.*
+!.env.example
+
+# Admin panel build tooling
+admin-panel/node_modules/
+admin-panel/.vite/
+*.log

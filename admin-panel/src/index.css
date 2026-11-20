@@ -1,0 +1,87 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", "Plus Jakarta Sans", ui-sans-serif, sans-serif;
+
+  --color-ink-950: #090514;
+  --color-ink-900: #0d0820;
+  --color-ink-800: #110c24;
+  --color-ink-700: #181133;
+  --color-ink-600: #241a47;
+
+  --color-brand-300: #c3b1f5;
+  --color-brand-400: #9e77ed;
+  --color-brand-500: #7f56d9;
+  --color-brand-600: #6941c6;
+  --color-brand-700: #4f378a;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  background-color: #090514;
+  color: #e8e6f2;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+html.light body {
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Polished styling for native select dropdowns and options */
+select {
+  cursor: pointer;
+}
+
+/* Dark mode options */
+html.dark select option,
+select option {
+  background-color: #17112c !important;
+  color: #f1f0f7 !important;
+  padding: 8px 12px;
+}
+
+/* Light mode options */
+html.light select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  padding: 8px 12px;
+}
+
+select option:checked {
+  background-color: #7f56d9 !important;
+  color: #ffffff !important;
+}
+
+/* Slim scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #2d2257 transparent;
+}
+
+html.light * {
+  scrollbar-color: #cbd5e1 transparent;
+}
+
+.recharts-tooltip-wrapper {
+  outline: none;
+}

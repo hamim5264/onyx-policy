@@ -1063,6 +1063,135 @@
                 border-radius: 28px;
             }
         }
+
+        /* Community Milestone Stats Section */
+        .section-community-stats {
+            padding: 40px 0 80px 0;
+            position: relative;
+        }
+
+        .community-stats-card {
+            background: linear-gradient(180deg, rgba(32, 22, 64, 0.75) 0%, rgba(15, 10, 32, 0.95) 100%);
+            border: 1px solid rgba(158, 119, 237, 0.3);
+            border-radius: var(--radius-xl);
+            padding: 64px 32px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 100px rgba(127, 86, 217, 0.2);
+        }
+
+        .community-stats-card::before {
+            content: '';
+            position: absolute;
+            top: -40%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70%;
+            height: 90%;
+            background: radial-gradient(ellipse at center, rgba(127, 86, 217, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+            pointer-events: none;
+        }
+
+        .community-live-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 20px;
+            border-radius: 9999px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            color: #34d399;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 24px;
+        }
+
+        .pulse-dot {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background-color: #10b981;
+            box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            animation: pulseGreen 2s infinite;
+        }
+
+        @keyframes pulseGreen {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 12px rgba(16, 185, 129, 0);
+            }
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
+        }
+
+        .community-big-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(5rem, 14vw, 9.5rem);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            background: linear-gradient(135deg, #ffffff 10%, #d8c8ff 50%, #7f56d9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 16px;
+            filter: drop-shadow(0 15px 30px rgba(127, 86, 217, 0.45));
+        }
+
+        .community-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.5rem, 3.5vw, 2.4rem);
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
+        }
+
+        .community-desc {
+            max-width: 650px;
+            margin: 0 auto 40px auto;
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            line-height: 1.65;
+        }
+
+        .community-highlights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 780px;
+            margin: 0 auto;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .highlight-item {
+            padding: 12px;
+        }
+
+        .highlight-val {
+            display: block;
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .highlight-lbl {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
     </style>
 </head>
 <body>
@@ -1365,6 +1494,37 @@
         </div>
     </section>
 
+    <!-- Big Active Users Community Milestone Section -->
+    <section class="section-community-stats" id="community">
+        <div class="container">
+            <div class="community-stats-card">
+                <div class="community-live-pill">
+                    <span class="pulse-dot"></span>
+                    <span id="cmsLiveStatus">Live Community Milestone</span>
+                </div>
+                <h2 class="community-big-number" id="cmsActiveUsers">100+</h2>
+                <h3 class="community-title" id="cmsUsersTitle">Active Users & Growing Daily</h3>
+                <p class="community-desc" id="cmsUsersDesc">
+                    Empowering everyday people with private-first expense tracking, smart SMS intake, and offline AI intelligence.
+                </p>
+                <div class="community-highlights-grid">
+                    <div class="highlight-item">
+                        <span class="highlight-val" id="cmsStatTxs">130+</span>
+                        <span class="highlight-lbl">Transactions Logged</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-val" id="cmsStatVol">৳175K+</span>
+                        <span class="highlight-lbl">Volume Managed</span>
+                    </div>
+                    <div class="highlight-item">
+                        <span class="highlight-val">100%</span>
+                        <span class="highlight-lbl">Private & Offline First</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
@@ -1432,6 +1592,56 @@
                 });
             });
         }
+
+        // Live Supabase CMS Loader (Safe & Resilient)
+        (function() {
+            const SUPABASE_URL = "https://qihlhpgasiueceemhmdw.supabase.co";
+            const ANON_KEY = "sb_publishable_Pe8hhg4wzrLc1QNjwDmU5A_o1vUy-PE";
+
+            async function loadWebsiteCMS() {
+                try {
+                    const res = await fetch(`${SUPABASE_URL}/rest/v1/app_config?key=eq.website_content&select=value`, {
+                        headers: {
+                            'apikey': ANON_KEY,
+                            'Authorization': `Bearer ${ANON_KEY}`
+                        }
+                    });
+                    if (!res.ok) return;
+                    const data = await res.json();
+                    if (!data || !data.length || !data[0].value) return;
+                    const c = data[0].value;
+
+                    // Update Active Users and Community Banner
+                    if (c.active_users) {
+                        const el = document.getElementById('cmsActiveUsers');
+                        if (el) el.textContent = c.active_users;
+                    }
+                    if (c.community_title) {
+                        const el = document.getElementById('cmsUsersTitle');
+                        if (el) el.textContent = c.community_title;
+                    }
+                    if (c.community_desc) {
+                        const el = document.getElementById('cmsUsersDesc');
+                        if (el) el.textContent = c.community_desc;
+                    }
+                    if (c.stat_txs) {
+                        const el = document.getElementById('cmsStatTxs');
+                        if (el) el.textContent = c.stat_txs;
+                    }
+                    if (c.stat_volume) {
+                        const el = document.getElementById('cmsStatVol');
+                        if (el) el.textContent = c.stat_volume;
+                    }
+                    if (c.live_status) {
+                        const el = document.getElementById('cmsLiveStatus');
+                        if (el) el.textContent = c.live_status;
+                    }
+                } catch (e) {
+                    // Fail silently: static fallback is already visible
+                }
+            }
+            loadWebsiteCMS();
+        })();
     </script>
 </body>
 </html>
